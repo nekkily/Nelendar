@@ -46,11 +46,21 @@ object CalendarUtil {
         return calendar.get(Calendar.DAY_OF_MONTH).toString()
     }
 
-    private fun getDaysInMonth(month: Date): ArrayList<Day> {
+    fun toDateMidnight(date: Date): Date {
+        val cal = Calendar.getInstance()
+        cal.time = date
+        cal[Calendar.HOUR_OF_DAY] = 0
+        cal[Calendar.MINUTE] = 0
+        cal[Calendar.SECOND] = 0
+        cal[Calendar.MILLISECOND] = 0
+        return cal.time
+    }
+
+    private fun getDaysInMonth(month: Date): ArrayList<DayModel> {
         val calendar = Calendar.getInstance().clone() as Calendar
         calendar.time = month
 
-        val cells = ArrayList<Day>()
+        val cells = ArrayList<DayModel>()
         val daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
         calendar.set(Calendar.DAY_OF_MONTH, 1)
 
@@ -67,7 +77,7 @@ object CalendarUtil {
         for (i in -prevMontDays..daysInMonth + nextMontDays) {
             val dayCalendar = calendar.clone() as Calendar
             dayCalendar.add(Calendar.DAY_OF_MONTH, i)
-            cells.add(Day(dayCalendar.time, i in 0 until daysInMonth))
+            cells.add(DayModel(dayCalendar.time, i in 0 until daysInMonth))
         }
 
         return cells

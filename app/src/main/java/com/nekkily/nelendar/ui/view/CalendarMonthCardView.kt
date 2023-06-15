@@ -10,8 +10,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -19,13 +17,13 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import com.nekkily.nelendar.ui.DAYS_IN_WEEK
-import com.nekkily.nelendar.util.Day
+import com.nekkily.nelendar.util.DayModel
 import com.nekkily.nelendar.util.LocaleDefault
 
 @Composable
 fun CalendarMonthCard(
     days: List<Any>,
-    dayView: @Composable (Day) -> Unit,
+    dayView: @Composable (DayModel) -> Unit,
     dayOfWeekColor: Color,
     dayOfWeekFontFamily: FontFamily,
     dayOfWeekFontSize: TextUnit,
@@ -51,9 +49,9 @@ fun CalendarMonthCard(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
-            } else if (days[it] is Day) {
+            } else if (days[it] is DayModel) {
                 Box {
-                    dayView(days[it] as Day)
+                    dayView(days[it] as DayModel)
                 }
             }
         }

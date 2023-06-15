@@ -47,10 +47,18 @@ class MainActivity : ComponentActivity() {
                     dayOfWeekFontFamily = defaultFontFamily,
                     dayOfWeekFontSize = 17.sp,
                     dayOfMonthBackgroundShape = RoundedCornerShape(7.dp),
+                    currentDayBackgroundColor = LightGray,
+                    selectedDayBackgroundColor = LavenderGray,
                     calendarHorizontalPadding = 26.dp,
                     calendarChildrenVerticalPadding = 14.dp,
                     horizontalDaysPadding = 8.dp,
-                    verticalDaysPadding = 8.dp
+                    verticalDaysPadding = 8.dp,
+                    onMonthChange = {
+
+                    },
+                    onDaySelected = {
+
+                    }
                 )
             }
         }

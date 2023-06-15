@@ -6,6 +6,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
@@ -15,6 +16,8 @@ import androidx.compose.ui.unit.dp
 import com.nekkily.nelendar.ui.FirstDayOfWeek
 import com.nekkily.nelendar.ui.theme.NelendarTheme
 import com.nekkily.nelendar.util.CalendarUtil
+import com.nekkily.nelendar.util.DayModel
+import java.util.*
 
 @Composable
 fun Calendar(
@@ -31,13 +34,18 @@ fun Calendar(
     dayOfWeekFontFamily: FontFamily,
     dayOfWeekFontSize: TextUnit,
     dayOfMonthBackgroundShape: RoundedCornerShape,
+    currentDayBackgroundColor: Color,
+    selectedDayBackgroundColor: Color,
     calendarHorizontalPadding: Dp,
     calendarChildrenVerticalPadding: Dp,
     horizontalDaysPadding: Dp,
-    verticalDaysPadding: Dp
+    verticalDaysPadding: Dp,
+    onMonthChange: (Date) -> Unit,
+    onDaySelected: (DayModel) -> Unit
 ) {
     NelendarTheme {
         val currentMonth = remember { mutableStateOf(CalendarUtil.generateMonthByIndex(0)) }
+        val selectedDay = remember { mutableStateOf(DayModel(Date(), true)) }
 
         EndlessViewPager(
             contentView = { initialPage, pageIndex ->
@@ -70,18 +78,24 @@ fun Calendar(
                                     day = day,
                                     backgroundShape = dayOfMonthBackgroundShape,
                                     backgroundColor = dayOfMonthBackgroundColor,
+                                    currentDayBackgroundColor = currentDayBackgroundColor,
+                                    selectedDayBackgroundColor = selectedDayBackgroundColor,
                                     currentMonthTextColor = dayOfMonthCurrentTextColor,
                                     otherMonthTextColor = dayOfMonthOtherTextColor,
                                     fontFamily = dayOfMonthFontFamily,
-                                    fontSize = dayOfMonthFontSize
-                                )
+                                    fontSize = dayOfMonthFontSize,
+                                    selectedDay = selectedDay
+                                ) {
+                                    selectedDay.value = it
+                                    onDaySelected(it)
+                                }
                             }
                         )
                     }
                 }
             },
             onPageChange = {
-
+                onMonthChange(CalendarUtil.generateMonthByIndex(it))
             }
         )
     }

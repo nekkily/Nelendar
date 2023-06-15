@@ -7,4 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="main_background">#010206</color>
+    <color name="item_month_title">#FFFFFFFF</color>
+    <color name="item_day_background">#16FFFFFF</color>
+    <color name="item_day_current_month">#FFFFFFFF</color>
+    <color name="item_day_not_current_month">#615E83</color>
+    <color name="day_of_week">#656565</color>
 </resources>

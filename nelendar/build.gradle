@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
 }
 
@@ -8,7 +8,6 @@ android {
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.nekkily.nelendar"
         minSdk 24
         targetSdk 34
         versionCode 1
@@ -71,5 +70,4 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:1.4.3"
     implementation "androidx.compose.ui:ui-tooling-preview:1.4.3"
 
-    implementation(project(":nelendar"))
 }

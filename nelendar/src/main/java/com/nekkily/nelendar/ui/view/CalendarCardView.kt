@@ -45,7 +45,7 @@ fun CalendarCard(
 ) {
     val selectedDay = remember { mutableStateOf(DayModel(Date(), true)) }
 
-    val daysNames = CalendarUtil.getWeekDaysNames(date, firstDayOfWeek)
+    val daysNames = CalendarUtil.getWeekDaysNames(firstDayOfWeek)
 
     LazyVerticalGrid(
         modifier = Modifier

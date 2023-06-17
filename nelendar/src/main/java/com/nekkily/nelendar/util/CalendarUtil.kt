@@ -27,7 +27,7 @@ object CalendarUtil {
     }
 
     fun getMonthName(month: Date): String {
-        return SimpleDateFormat("LLLL", LocaleDefault.get()).format(month)
+        return SimpleDateFormat("LLLL yyyy", LocaleDefault.get()).format(month)
             .replaceFirstChar {
                 if (it.isLowerCase()) {
                     it.titlecase(LocaleDefault.get())
@@ -37,7 +37,7 @@ object CalendarUtil {
             }
     }
 
-    fun getWeekDaysNames(month: Date, firstDayOfWeek: FirstDayOfWeek): ArrayList<String> {
+    fun getWeekDaysNames(firstDayOfWeek: FirstDayOfWeek): ArrayList<String> {
         val names = ArrayList<String>()
         val daysNames = DateFormatSymbols(LocaleDefault.get()).shortWeekdays.toMutableList()
         daysNames.removeAt(0)

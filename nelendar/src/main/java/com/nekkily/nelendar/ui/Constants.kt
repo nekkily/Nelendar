@@ -6,3 +6,8 @@ enum class FirstDayOfWeek {
     MONDAY,
     SUNDAY
 }
+
+enum class CalendarState {
+    MONTH,
+    WEEK
+}

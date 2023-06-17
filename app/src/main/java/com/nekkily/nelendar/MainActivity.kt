@@ -11,11 +11,15 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.nekkily.nelendar.ui.CalendarState
 import com.nekkily.nelendar.ui.FirstDayOfWeek
 import com.nekkily.nelendar.ui.theme.*
 import com.nekkily.nelendar.ui.view.Calendar
@@ -52,6 +56,7 @@ class MainActivity : ComponentActivity() {
                     calendarChildrenVerticalPadding = 14.dp,
                     horizontalDaysPadding = 8.dp,
                     verticalDaysPadding = 8.dp,
+                    calendarState = CalendarState.MONTH,
                     onMonthChange = {
 
                     },

@@ -1,5 +1,6 @@
 package com.nekkily.nelendar.util
 
+import com.nekkily.nelendar.ui.DAYS_IN_WEEK
 import com.nekkily.nelendar.ui.FirstDayOfWeek
 import java.text.DateFormatSymbols
 import java.text.SimpleDateFormat
@@ -16,6 +17,15 @@ object CalendarUtil {
         return calendar.time
     }
 
+    fun generateWeekByIndex(pageIndex: Int): Date {
+        val calendar = Calendar.getInstance()
+        calendar.time = Date()
+        val days = arrayListOf(calendar.time)
+        days.add(calendar.time)
+        calendar.add(Calendar.WEEK_OF_MONTH, pageIndex)
+        return calendar.time
+    }
+
     fun getMonthName(month: Date): String {
         return SimpleDateFormat("LLLL", LocaleDefault.get()).format(month)
             .replaceFirstChar {
@@ -27,17 +37,16 @@ object CalendarUtil {
             }
     }
 
-    fun getCalendarDays(month: Date, firstDayOfWeek: FirstDayOfWeek): ArrayList<Any> {
-        val list = ArrayList<Any>()
+    fun getWeekDaysNames(month: Date, firstDayOfWeek: FirstDayOfWeek): ArrayList<String> {
+        val names = ArrayList<String>()
         val daysNames = DateFormatSymbols(LocaleDefault.get()).shortWeekdays.toMutableList()
         daysNames.removeAt(0)
         if (firstDayOfWeek == FirstDayOfWeek.MONDAY) {
             val sunday = daysNames.removeAt(0)
             daysNames.add(sunday)
         }
-        list.addAll(daysNames)
-        list.addAll(getDaysInMonth(month))
-        return list
+        names.addAll(daysNames)
+        return names
     }
 
     fun getDayOfMonth(date: Date): String {
@@ -56,7 +65,7 @@ object CalendarUtil {
         return cal.time
     }
 
-    private fun getDaysInMonth(month: Date): ArrayList<DayModel> {
+    fun getDaysInMonth(month: Date): ArrayList<DayModel> {
         val calendar = Calendar.getInstance().clone() as Calendar
         calendar.time = month
 
@@ -64,12 +73,7 @@ object CalendarUtil {
         val daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
         calendar.set(Calendar.DAY_OF_MONTH, 1)
 
-        var dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
-        if (dayOfWeek == 1) {
-            dayOfWeek = 7
-        } else {
-            dayOfWeek -= 1
-        }
+        val dayOfWeek = getDayOfWeek(calendar)
 
         val prevMontDays = dayOfWeek - 1
         val nextMontDays = 35 - prevMontDays - daysInMonth - 1
@@ -81,5 +85,37 @@ object CalendarUtil {
         }
 
         return cells
+    }
+
+    fun getDaysInWeek(date: Date): ArrayList<DayModel> {
+        val calendar = Calendar.getInstance().clone() as Calendar
+        calendar.time = date
+
+        val dayOfWeek = getDayOfWeek(calendar)
+
+        calendar.add(Calendar.DAY_OF_MONTH, -dayOfWeek)
+
+        val cells = ArrayList<DayModel>()
+        for (i in 1..DAYS_IN_WEEK) {
+            val dayCalendar = calendar.clone() as Calendar
+            dayCalendar.add(Calendar.DAY_OF_WEEK, i)
+            cells.add(
+                DayModel(
+                    dayCalendar.time,
+                    dayCalendar.get(Calendar.MONTH) == calendar.get(Calendar.MONTH)
+                )
+            )
+        }
+
+        return cells
+    }
+
+    private fun getDayOfWeek(calendar: Calendar): Int {
+        val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
+        return if (dayOfWeek == 1) {
+            DAYS_IN_WEEK
+        } else {
+            dayOfWeek - 1
+        }
     }
 }

@@ -40,6 +40,7 @@ fun Calendar(
     horizontalDaysPadding: Dp,
     verticalDaysPadding: Dp,
     calendarState: CalendarState,
+    selectedDay: MutableState<DayModel>,
     onMonthChange: (Date) -> Unit,
     onDaySelected: (DayModel) -> Unit
 ) {
@@ -84,6 +85,7 @@ fun Calendar(
                             horizontalDaysPadding = horizontalDaysPadding,
                             verticalDaysPadding = verticalDaysPadding,
                             calendarState = calendarState,
+                            selectedDay = selectedDay,
                             onDaySelected = onDaySelected
                         )
                     }

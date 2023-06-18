@@ -23,6 +23,8 @@ import com.nekkily.nelendar.ui.CalendarState
 import com.nekkily.nelendar.ui.FirstDayOfWeek
 import com.nekkily.nelendar.ui.theme.*
 import com.nekkily.nelendar.ui.view.Calendar
+import com.nekkily.nelendar.util.DayModel
+import java.util.*
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +37,8 @@ class MainActivity : ComponentActivity() {
                         color = colorResource(id = R.color.main_background)
                     )
             ) {
+                val selectedDay = remember { mutableStateOf(DayModel(Date(), true)) }
+
                 val defaultFontFamily = FontFamily.Serif
                 Calendar(
                     firstDayOfWeek = FirstDayOfWeek.MONDAY,
@@ -57,6 +61,7 @@ class MainActivity : ComponentActivity() {
                     horizontalDaysPadding = 8.dp,
                     verticalDaysPadding = 8.dp,
                     calendarState = CalendarState.MONTH,
+                    selectedDay = selectedDay,
                     onMonthChange = {
 
                     },

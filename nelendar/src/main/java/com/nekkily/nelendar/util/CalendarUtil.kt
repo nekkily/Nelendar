@@ -28,10 +28,10 @@ object CalendarUtil {
     }
 
     fun getMonthName(month: Date): String {
-        return SimpleDateFormat("LLLL yyyy", LocaleDefault.get()).format(month)
+        return SimpleDateFormat("LLLL yyyy", LocaleDefault()).format(month)
             .replaceFirstChar {
                 if (it.isLowerCase()) {
-                    it.titlecase(LocaleDefault.get())
+                    it.titlecase(LocaleDefault())
                 } else {
                     it.toString()
                 }
@@ -40,7 +40,7 @@ object CalendarUtil {
 
     fun getWeekDaysNames(firstDayOfWeek: FirstDayOfWeek): ArrayList<String> {
         val names = ArrayList<String>()
-        val daysNames = DateFormatSymbols(LocaleDefault.get()).shortWeekdays.toMutableList()
+        val daysNames = DateFormatSymbols(LocaleDefault()).shortWeekdays.toMutableList()
         daysNames.removeAt(0)
         if (firstDayOfWeek == FirstDayOfWeek.MONDAY) {
             val sunday = daysNames.removeAt(0)

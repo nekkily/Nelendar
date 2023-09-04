@@ -1,6 +1,5 @@
 package com.nekkily.nelendar.model.params
 
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily

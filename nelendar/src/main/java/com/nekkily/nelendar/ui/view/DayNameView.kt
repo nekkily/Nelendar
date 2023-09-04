@@ -20,7 +20,7 @@ fun DayName(
         textAlign = TextAlign.Center,
         fontSize = dayOfWeekFontSize,
         fontFamily = dayOfWeekFontFamily,
-        text = day.lowercase(LocaleDefault.get()),
+        text = day.lowercase(LocaleDefault()),
         color = dayOfWeekColor,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis

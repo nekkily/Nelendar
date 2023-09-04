@@ -1,13 +1,7 @@
 package com.nekkily.nelendar.ui.theme
 
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.unit.Dp
-import com.nekkily.nelendar.ui.FirstDayOfWeek
 
 /*private val DarkColorPalette = darkColors(
     primary = Purple200,
@@ -32,7 +26,7 @@ private val LightColorPalette = lightColors(
 
 @Composable
 fun NelendarTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    //darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
     /*val colors = if (darkTheme) {

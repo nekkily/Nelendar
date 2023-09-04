@@ -4,5 +4,5 @@ import java.util.*
 
 object LocaleDefault {
     
-    fun get() = Locale.getDefault()
+    operator fun invoke(): Locale = Locale.getDefault()
 }

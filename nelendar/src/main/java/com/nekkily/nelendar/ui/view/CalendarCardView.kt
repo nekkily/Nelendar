@@ -6,22 +6,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import com.nekkily.nelendar.model.params.CalendarParams
 import com.nekkily.nelendar.ui.CalendarState
 import com.nekkily.nelendar.ui.DAYS_IN_WEEK
-import com.nekkily.nelendar.ui.FirstDayOfWeek
 import com.nekkily.nelendar.util.CalendarUtil
-import com.nekkily.nelendar.model.DayModel
-import com.nekkily.nelendar.model.params.CalendarParams
-import java.util.*
+import java.util.Date
 
 @Composable
 fun CalendarCard(

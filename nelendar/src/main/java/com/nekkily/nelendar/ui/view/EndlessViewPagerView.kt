@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun EndlessViewPagerPreview() {
     EndlessViewPager(
-        { initialPage, page ->
+        { _, page ->
             val color = if (page % 2 == 0) {
                 Color.Red
             } else {
@@ -42,7 +42,13 @@ fun EndlessViewPager(
     onPageChange: (Int) -> Unit
 ) {
     val initialPage = Int.MAX_VALUE / 2
-    val pagerState = rememberPagerState(initialPage)
+    val pageCount = Int.MAX_VALUE
+    val pagerState = rememberPagerState(
+        initialPage = initialPage,
+        initialPageOffsetFraction = 0f
+    ) {
+        pageCount
+    }
 
     LaunchedEffect(pagerState) {
         snapshotFlow { pagerState.currentPage }.collect { page ->
@@ -51,12 +57,12 @@ fun EndlessViewPager(
     }
 
     HorizontalPager(
-        pageCount = Int.MAX_VALUE,
-        state = pagerState,
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight(),
-    ) { page ->
-        contentView(initialPage, page)
-    }
+        state = pagerState,
+        pageContent = { page ->
+            contentView(initialPage, page)
+        }
+    )
 }

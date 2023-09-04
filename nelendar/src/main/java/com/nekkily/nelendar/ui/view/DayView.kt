@@ -121,7 +121,7 @@ fun DayCard(
     content: @Composable ColumnScope.() -> Unit
 ) {
     val isDayCurrent = toDateMidnight(Date()) == toDateMidnight(day.date)
-    val isSelectedDay = selectedDay.value == day
+    val isSelectedDay = toDateMidnight(selectedDay.value.date) == toDateMidnight(day.date)
 
     Card(
         modifier = Modifier

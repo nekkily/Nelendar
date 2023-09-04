@@ -1,5 +1,6 @@
 package com.nekkily.nelendar.util
 
+import com.nekkily.nelendar.model.DayModel
 import com.nekkily.nelendar.ui.DAYS_IN_WEEK
 import com.nekkily.nelendar.ui.FirstDayOfWeek
 import java.text.DateFormatSymbols

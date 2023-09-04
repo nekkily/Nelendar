@@ -1,8 +1,8 @@
-package com.nekkily.nelendar.util
+package com.nekkily.nelendar.model
 
 import java.util.Date
 
-data class Day(
+data class DayModel(
     val date: Date,
     val isCurrentMonth: Boolean
 )

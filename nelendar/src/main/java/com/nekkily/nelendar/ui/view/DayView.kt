@@ -17,45 +17,41 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import com.nekkily.nelendar.model.DayModel
+import com.nekkily.nelendar.model.params.DayParams
 import com.nekkily.nelendar.util.CalendarUtil
 import com.nekkily.nelendar.util.CalendarUtil.toDateMidnight
-import com.nekkily.nelendar.util.DayModel
 import java.util.*
 
 @Composable
 fun MonthDay(
     day: DayModel,
-    backgroundShape: RoundedCornerShape,
-    backgroundColor: Color,
-    currentDayBackgroundColor: Color,
-    selectedDayBackgroundColor: Color,
-    currentMonthTextColor: Color,
-    otherMonthTextColor: Color,
-    fontFamily: FontFamily,
-    fontSize: TextUnit,
     selectedDay: MutableState<DayModel>,
+    params: DayParams,
     onItemClick: (DayModel) -> Unit
 ) {
-    DayCard(
-        height = 64.dp,
-        day = day,
-        backgroundShape = backgroundShape,
-        backgroundColor = backgroundColor,
-        currentDayBackgroundColor = currentDayBackgroundColor,
-        selectedDayBackgroundColor = selectedDayBackgroundColor,
-        selectedDay = selectedDay,
-        onItemClick = onItemClick
-    ) {
-        DayText(
-            day,
-            fontFamily,
-            fontSize,
-            if (day.isCurrentMonth) {
-                currentMonthTextColor
-            } else {
-                otherMonthTextColor
-            }
-        )
+    params.apply {
+        DayCard(
+            height = 64.dp,
+            day = day,
+            backgroundShape = dayOfMonthBackgroundShape,
+            backgroundColor = dayOfMonthBackgroundColor,
+            currentDayBackgroundColor = currentDayBackgroundColor,
+            selectedDayBackgroundColor = selectedDayBackgroundColor,
+            selectedDay = selectedDay,
+            onItemClick = onItemClick
+        ) {
+            DayText(
+                day,
+                dayOfMonthFontFamily,
+                dayOfMonthFontSize,
+                if (day.isCurrentMonth) {
+                    dayOfMonthCurrentTextColor
+                } else {
+                    dayOfMonthOtherTextColor
+                }
+            )
+        }
     }
 }
 
@@ -63,47 +59,40 @@ fun MonthDay(
 fun WeekDay(
     day: DayModel,
     dayName: String,
-    backgroundShape: RoundedCornerShape,
-    backgroundColor: Color,
-    currentDayBackgroundColor: Color,
-    selectedDayBackgroundColor: Color,
-    currentMonthTextColor: Color,
-    fontFamily: FontFamily,
-    fontSize: TextUnit,
-    dayOfWeekColor: Color,
-    dayOfWeekFontFamily: FontFamily,
-    dayOfWeekFontSize: TextUnit,
     selectedDay: MutableState<DayModel>,
+    params: DayParams,
     onItemClick: (DayModel) -> Unit
 ) {
-    DayCard(
-        height = 86.dp,
-        day = day,
-        backgroundShape = backgroundShape,
-        backgroundColor = backgroundColor,
-        currentDayBackgroundColor = currentDayBackgroundColor,
-        selectedDayBackgroundColor = selectedDayBackgroundColor,
-        selectedDay = selectedDay,
-        onItemClick = onItemClick
-    ) {
-        Column {
-            Box(
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-            ) {
-                DayName(
-                    day = dayName,
-                    dayOfWeekColor = dayOfWeekColor,
-                    dayOfWeekFontFamily = dayOfWeekFontFamily,
-                    dayOfWeekFontSize = dayOfWeekFontSize
+    params.apply {
+        DayCard(
+            height = 86.dp,
+            day = day,
+            backgroundShape = dayOfMonthBackgroundShape,
+            backgroundColor = dayOfMonthBackgroundColor,
+            currentDayBackgroundColor = currentDayBackgroundColor,
+            selectedDayBackgroundColor = selectedDayBackgroundColor,
+            selectedDay = selectedDay,
+            onItemClick = onItemClick
+        ) {
+            Column {
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                ) {
+                    DayName(
+                        day = dayName,
+                        dayOfWeekColor = dayOfWeekColor,
+                        dayOfWeekFontFamily = dayOfWeekFontFamily,
+                        dayOfWeekFontSize = dayOfWeekFontSize
+                    )
+                }
+                DayText(
+                    day,
+                    dayOfMonthFontFamily,
+                    dayOfMonthFontSize,
+                    dayOfMonthCurrentTextColor
                 )
             }
-            DayText(
-                day,
-                fontFamily,
-                fontSize,
-                currentMonthTextColor
-            )
         }
     }
 }

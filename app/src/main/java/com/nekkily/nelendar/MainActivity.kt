@@ -7,24 +7,25 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.nekkily.nelendar.model.DayModel
+import com.nekkily.nelendar.model.params.CalendarParams
+import com.nekkily.nelendar.model.params.DayParams
 import com.nekkily.nelendar.ui.CalendarState
 import com.nekkily.nelendar.ui.FirstDayOfWeek
-import com.nekkily.nelendar.ui.theme.*
+import com.nekkily.nelendar.ui.theme.Gray
+import com.nekkily.nelendar.ui.theme.Lavender
+import com.nekkily.nelendar.ui.theme.LavenderGray
+import com.nekkily.nelendar.ui.theme.LightGray
+import com.nekkily.nelendar.ui.theme.White
 import com.nekkily.nelendar.ui.view.Calendar
-import com.nekkily.nelendar.util.DayModel
-import java.util.*
+import java.util.Date
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,33 +42,34 @@ class MainActivity : ComponentActivity() {
 
                 val defaultFontFamily = FontFamily.Serif
                 Calendar(
-                    firstDayOfWeek = FirstDayOfWeek.MONDAY,
-                    monthTextColor = White,
-                    monthFontFamily = defaultFontFamily,
-                    monthFontSize = 32.sp,
-                    dayOfMonthBackgroundColor = Gray,
-                    dayOfMonthCurrentTextColor = White,
-                    dayOfMonthOtherTextColor = Lavender,
-                    dayOfMonthFontFamily = defaultFontFamily,
-                    dayOfMonthFontSize = 20.sp,
-                    dayOfWeekColor = Gray,
-                    dayOfWeekFontFamily = defaultFontFamily,
-                    dayOfWeekFontSize = 17.sp,
-                    dayOfMonthBackgroundShape = RoundedCornerShape(7.dp),
-                    currentDayBackgroundColor = LightGray,
-                    selectedDayBackgroundColor = LavenderGray,
-                    calendarHorizontalPadding = 26.dp,
-                    calendarChildrenVerticalPadding = 14.dp,
-                    horizontalDaysPadding = 8.dp,
-                    verticalDaysPadding = 8.dp,
-                    calendarState = CalendarState.MONTH,
-                    selectedDay = selectedDay,
-                    onMonthChange = {
+                    params = CalendarParams(
+                        firstDayOfWeek = FirstDayOfWeek.MONDAY,
+                        monthTextColor = White,
+                        monthFontFamily = defaultFontFamily,
+                        monthFontSize = 32.sp,
+                        calendarHorizontalPadding = 26.dp,
+                        calendarChildrenVerticalPadding = 14.dp,
+                        horizontalDaysPadding = 8.dp,
+                        verticalDaysPadding = 8.dp,
+                        calendarState = CalendarState.WEEK,
+                        selectedDay = selectedDay,
+                        onMonthChange = {},
 
-                    },
-                    onDaySelected = {
-
-                    }
+                        dayParams = DayParams(
+                            dayOfMonthBackgroundColor = Gray,
+                            dayOfMonthCurrentTextColor = White,
+                            dayOfMonthOtherTextColor = Lavender,
+                            dayOfMonthFontFamily = defaultFontFamily,
+                            dayOfMonthFontSize = 20.sp,
+                            dayOfWeekColor = Gray,
+                            dayOfWeekFontFamily = defaultFontFamily,
+                            dayOfWeekFontSize = 17.sp,
+                            dayOfMonthBackgroundShape = RoundedCornerShape(7.dp),
+                            currentDayBackgroundColor = LightGray,
+                            selectedDayBackgroundColor = LavenderGray,
+                            onDaySelected = {}
+                        ),
+                    )
                 )
             }
         }

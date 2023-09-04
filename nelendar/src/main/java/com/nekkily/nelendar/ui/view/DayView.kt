@@ -90,7 +90,11 @@ fun WeekDay(
                     day,
                     dayOfMonthFontFamily,
                     dayOfMonthFontSize,
-                    dayOfMonthCurrentTextColor
+                    if (day.isCurrentMonth) {
+                        dayOfMonthCurrentTextColor
+                    } else {
+                        dayOfMonthOtherTextColor
+                    }
                 )
             }
         }

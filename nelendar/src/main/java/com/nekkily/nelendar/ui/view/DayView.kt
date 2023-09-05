@@ -23,6 +23,15 @@ import com.nekkily.nelendar.util.CalendarUtil
 import com.nekkily.nelendar.util.CalendarUtil.toDateMidnight
 import java.util.*
 
+/**
+ * Day cell composable view when calendar displayed as months.
+ *
+ * @param day [DayModel] model of displayed day.
+ * @param selectedDay [MutableState][DayModel] remember state of selected day.
+ * @param params [DayParams] params model for detailed day settings.
+ * @param onItemClick callback informs about the day selection.
+ * Returns the [DayModel] of the selected day.
+ */
 @Composable
 fun MonthDay(
     day: DayModel,
@@ -32,8 +41,8 @@ fun MonthDay(
 ) {
     params.apply {
         DayCard(
-            height = 64.dp,
             day = day,
+            height = 64.dp,
             backgroundShape = dayBackgroundShape,
             backgroundColor = dayBackgroundColor,
             currentDayBackgroundColor = currentDayBackgroundColor,
@@ -55,6 +64,16 @@ fun MonthDay(
     }
 }
 
+/**
+ * Day cell composable view when calendar displayed as weeks.
+ *
+ * @param day [DayModel] model of displayed day.
+ * @param dayName [String] day of week name corresponding to the day.
+ * @param selectedDay [MutableState][DayModel] remember state of selected day.
+ * @param params [DayParams] params model for detailed day settings.
+ * @param onItemClick callback informs about the day selection.
+ * Returns the [DayModel] of the selected day.
+ */
 @Composable
 fun WeekDay(
     day: DayModel,
@@ -65,8 +84,8 @@ fun WeekDay(
 ) {
     params.apply {
         DayCard(
-            height = 86.dp,
             day = day,
+            height = 86.dp,
             backgroundShape = dayBackgroundShape,
             backgroundColor = dayBackgroundColor,
             currentDayBackgroundColor = currentDayBackgroundColor,
@@ -81,9 +100,9 @@ fun WeekDay(
                 ) {
                     DayName(
                         day = dayName,
-                        dayOfWeekColor = dayOfWeekColor,
-                        dayOfWeekFontFamily = dayOfWeekFontFamily,
-                        dayOfWeekFontSize = dayOfWeekFontSize
+                        color = dayOfWeekColor,
+                        fontFamily = dayOfWeekFontFamily,
+                        fontSize = dayOfWeekFontSize
                     )
                 }
                 DayText(
@@ -101,10 +120,25 @@ fun WeekDay(
     }
 }
 
+/**
+ * Day cell composable view.
+ *
+ * @param day [DayModel] model of displayed day.
+ * @param height [Dp] height of view.
+ * @param backgroundShape [RoundedCornerShape] background shape of cell.
+ * @param backgroundColor [Color] to apply to the cell.
+ * @param currentDayBackgroundColor [Color] to apply to the today cell.
+ * @param selectedDayBackgroundColor [Color] to apply to the selected day cell.
+ * @param selectedDay [MutableState][DayModel] remember state of selected day.
+ * Contains the [DayModel] of the selected day.
+ * @param onItemClick callback informs about the day selection.
+ * Returns the [DayModel] of the selected day.
+ * @param content [Composable][ColumnScope].
+ */
 @Composable
 fun DayCard(
-    height: Dp,
     day: DayModel,
+    height: Dp,
     backgroundShape: RoundedCornerShape,
     backgroundColor: Color,
     currentDayBackgroundColor: Color,
@@ -137,6 +171,14 @@ fun DayCard(
     }
 }
 
+/**
+ * Number of the day of the month composable view.
+ *
+ * @param day [DayModel] model of displayed day.
+ * @param fontFamily [FontFamily] to apply to the text.
+ * @param fontSize [TextUnit] font size of text.
+ * @param textColor [Color] to apply to the text.
+ */
 @Composable
 fun ColumnScope.DayText(
     day: DayModel,

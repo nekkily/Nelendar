@@ -29,7 +29,7 @@ import java.util.Date
  * Note that this is the total distance, not from each cell.
  * @param calendarState [CalendarState] visual display of the calendar by month or week. Default value [CalendarState.WEEK].
  * @param selectedDay [MutableState][DayModel] remember state of selected day.
- * Returns the [DayModel] of the selected day.
+ * Contains the [DayModel] of the selected day.
  * @param dayParams [DayParams] params model for detailed day settings.
  */
 class CalendarParams(

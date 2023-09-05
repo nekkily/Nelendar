@@ -14,6 +14,13 @@ import com.nekkily.nelendar.ui.CalendarState
 import com.nekkily.nelendar.ui.theme.NelendarTheme
 import com.nekkily.nelendar.util.CalendarUtil
 
+/**
+ * Main composable view of calendar.
+ * Contains [EndlessViewPager] custom composable view that display [CalendarCard] - months or weeks.
+ * The name of the month is also displayed.
+ *
+ * @param params [CalendarParams] calendar params.
+ */
 @Composable
 fun Calendar(
     params: CalendarParams

@@ -27,7 +27,7 @@ import com.nekkily.nelendar.ui.theme.White
  * @param dayOfWeekFontSize [TextUnit] font size of name of day in week. Default value 15sp[TextUnit].
  * @param currentDayBackgroundColor [Color] to apply to the today cell. Default value [LightGray].
  * @param selectedDayBackgroundColor [Color] to apply to the selected day cell. Default value [LavenderGray].
- * @param onDaySelected [DayParams] callback informs about the day selection.
+ * @param onDaySelected callback informs about the day selection.
  * Returns the [DayModel] of the selected day.
  */
 class DayParams(

@@ -11,20 +11,28 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import com.nekkily.nelendar.util.LocaleDefault
 
+/**
+ * Day of week name composable view.
+ *
+ * @param day [String] displayed name.
+ * @param color [Color] to apply to the text.
+ * @param fontFamily [FontFamily] font family of text.
+ * @param fontSize [TextUnit] font size of text.
+ */
 @Composable
 fun DayName(
     day: String,
-    dayOfWeekColor: Color,
-    dayOfWeekFontFamily: FontFamily,
-    dayOfWeekFontSize: TextUnit
+    color: Color,
+    fontFamily: FontFamily,
+    fontSize: TextUnit
 ) {
     Text(
         modifier = Modifier.fillMaxWidth(),
         textAlign = TextAlign.Center,
-        fontSize = dayOfWeekFontSize,
-        fontFamily = dayOfWeekFontFamily,
+        fontSize = fontSize,
+        fontFamily = fontFamily,
         text = day.lowercase(LocaleDefault()),
-        color = dayOfWeekColor,
+        color = color,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis
     )

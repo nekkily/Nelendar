@@ -61,10 +61,10 @@ class MainActivity : ComponentActivity() {
                             dayOtherMonthTextColor = Lavender,
                             dayFontFamily = defaultFontFamily,
                             dayFontSize = 20.sp,
+                            dayBackgroundShape = RoundedCornerShape(7.dp),
                             dayOfWeekColor = Gray,
                             dayOfWeekFontFamily = defaultFontFamily,
                             dayOfWeekFontSize = 15.sp,
-                            dayBackgroundShape = RoundedCornerShape(7.dp),
                             currentDayBackgroundColor = LightGray,
                             selectedDayBackgroundColor = LavenderGray,
                             onDaySelected = {}

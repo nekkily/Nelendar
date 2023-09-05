@@ -15,6 +15,15 @@ import com.nekkily.nelendar.ui.DAYS_IN_WEEK
 import com.nekkily.nelendar.util.CalendarUtil
 import java.util.Date
 
+/**
+ * Composable view of calendar card/slide.
+ * Represents [LazyVerticalGrid] of day cells. Slides is months or weeks.
+ * Months displays with composition of [DayName] and [MonthDay].
+ * Weeks displays with [WeekDay].
+ *
+ * @param date [Date] contains date of displayed month.
+ * @param params [CalendarParams] calendar params.
+ */
 @Composable
 fun CalendarCard(
     date: Date,
@@ -26,7 +35,7 @@ fun CalendarCard(
         LazyVerticalGrid(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(26.dp, 0.dp),
+                .padding(params.calendarHorizontalPadding, 0.dp),
             columns = GridCells.Fixed(DAYS_IN_WEEK),
             horizontalArrangement = Arrangement.spacedBy(horizontalDaysPadding),
             verticalArrangement = Arrangement.spacedBy(verticalDaysPadding)
@@ -35,9 +44,9 @@ fun CalendarCard(
                 items(daysNames.size) {
                     DayName(
                         day = daysNames[it],
-                        dayOfWeekColor = dayParams.dayOfWeekColor,
-                        dayOfWeekFontFamily = dayParams.dayOfWeekFontFamily,
-                        dayOfWeekFontSize = dayParams.dayOfWeekFontSize
+                        color = dayParams.dayOfWeekColor,
+                        fontFamily = dayParams.dayOfWeekFontFamily,
+                        fontSize = dayParams.dayOfWeekFontSize
                     )
                 }
                 val days = CalendarUtil.getDaysInMonth(date, firstDayOfWeek)

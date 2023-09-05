@@ -35,6 +35,13 @@ fun EndlessViewPagerPreview() {
     )
 }
 
+/**
+ * Endless pager/slider based on HorizontalPager.
+ *
+ * @param contentView [Composable][ColumnScope].
+ * @param onPageChange callback informs about page change.
+ * Returns the [Int] index of current page.
+ */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun EndlessViewPager(

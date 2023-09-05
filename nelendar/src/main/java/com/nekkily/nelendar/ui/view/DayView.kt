@@ -34,8 +34,8 @@ fun MonthDay(
         DayCard(
             height = 64.dp,
             day = day,
-            backgroundShape = dayOfMonthBackgroundShape,
-            backgroundColor = dayOfMonthBackgroundColor,
+            backgroundShape = dayBackgroundShape,
+            backgroundColor = dayBackgroundColor,
             currentDayBackgroundColor = currentDayBackgroundColor,
             selectedDayBackgroundColor = selectedDayBackgroundColor,
             selectedDay = selectedDay,
@@ -43,12 +43,12 @@ fun MonthDay(
         ) {
             DayText(
                 day,
-                dayOfMonthFontFamily,
-                dayOfMonthFontSize,
+                dayFontFamily,
+                dayFontSize,
                 if (day.isCurrentMonth) {
-                    dayOfMonthCurrentTextColor
+                    dayCurrentMonthTextColor
                 } else {
-                    dayOfMonthOtherTextColor
+                    dayOtherMonthTextColor
                 }
             )
         }
@@ -67,8 +67,8 @@ fun WeekDay(
         DayCard(
             height = 86.dp,
             day = day,
-            backgroundShape = dayOfMonthBackgroundShape,
-            backgroundColor = dayOfMonthBackgroundColor,
+            backgroundShape = dayBackgroundShape,
+            backgroundColor = dayBackgroundColor,
             currentDayBackgroundColor = currentDayBackgroundColor,
             selectedDayBackgroundColor = selectedDayBackgroundColor,
             selectedDay = selectedDay,
@@ -88,12 +88,12 @@ fun WeekDay(
                 }
                 DayText(
                     day,
-                    dayOfMonthFontFamily,
-                    dayOfMonthFontSize,
+                    dayFontFamily,
+                    dayFontSize,
                     if (day.isCurrentMonth) {
-                        dayOfMonthCurrentTextColor
+                        dayCurrentMonthTextColor
                     } else {
-                        dayOfMonthOtherTextColor
+                        dayOtherMonthTextColor
                     }
                 )
             }

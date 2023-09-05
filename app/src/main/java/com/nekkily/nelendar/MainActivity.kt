@@ -44,11 +44,11 @@ class MainActivity : ComponentActivity() {
                 Calendar(
                     params = CalendarParams(
                         firstDayOfWeek = FirstDayOfWeek.MONDAY,
-                        monthTextColor = White,
-                        monthFontFamily = defaultFontFamily,
-                        monthFontSize = 32.sp,
+                        monthTitleTextColor = White,
+                        monthTitleFontFamily = defaultFontFamily,
+                        monthTitleFontSize = 32.sp,
                         calendarHorizontalPadding = 26.dp,
-                        calendarChildrenVerticalPadding = 14.dp,
+                        calendarMonthTitleBottomPadding = 14.dp,
                         horizontalDaysPadding = 8.dp,
                         verticalDaysPadding = 8.dp,
                         calendarState = CalendarState.WEEK,
@@ -56,15 +56,15 @@ class MainActivity : ComponentActivity() {
                         onMonthChange = {},
 
                         dayParams = DayParams(
-                            dayOfMonthBackgroundColor = Gray,
-                            dayOfMonthCurrentTextColor = White,
-                            dayOfMonthOtherTextColor = Lavender,
-                            dayOfMonthFontFamily = defaultFontFamily,
-                            dayOfMonthFontSize = 20.sp,
+                            dayBackgroundColor = Gray,
+                            dayCurrentMonthTextColor = White,
+                            dayOtherMonthTextColor = Lavender,
+                            dayFontFamily = defaultFontFamily,
+                            dayFontSize = 20.sp,
                             dayOfWeekColor = Gray,
                             dayOfWeekFontFamily = defaultFontFamily,
                             dayOfWeekFontSize = 15.sp,
-                            dayOfMonthBackgroundShape = RoundedCornerShape(7.dp),
+                            dayBackgroundShape = RoundedCornerShape(7.dp),
                             currentDayBackgroundColor = LightGray,
                             selectedDayBackgroundColor = LavenderGray,
                             onDaySelected = {}

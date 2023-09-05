@@ -34,13 +34,13 @@ fun Calendar(
                         Text(
                             modifier = Modifier
                                 .padding(params.calendarHorizontalPadding, 0.dp),
-                            fontSize = params.monthFontSize,
-                            fontFamily = params.monthFontFamily,
+                            fontSize = params.monthTitleFontSize,
+                            fontFamily = params.monthTitleFontFamily,
                             text = CalendarUtil.getMonthName(date),
-                            color = params.monthTextColor
+                            color = params.monthTitleTextColor
                         )
 
-                        Spacer(modifier = Modifier.height(params.calendarChildrenVerticalPadding))
+                        Spacer(modifier = Modifier.height(params.calendarMonthTitleBottomPadding))
 
                         CalendarCard(
                             date = date,

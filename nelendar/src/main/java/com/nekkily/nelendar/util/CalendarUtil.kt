@@ -66,7 +66,7 @@ object CalendarUtil {
         return cal.time
     }
 
-    fun getDaysInMonth(month: Date): ArrayList<DayModel> {
+    fun getDaysInMonth(month: Date, firstDayOfWeek: FirstDayOfWeek): ArrayList<DayModel> {
         val calendar = Calendar.getInstance().clone() as Calendar
         calendar.time = month
 
@@ -74,7 +74,7 @@ object CalendarUtil {
         val daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
         calendar.set(Calendar.DAY_OF_MONTH, 1)
 
-        val dayOfWeek = getDayOfWeek(calendar)
+        val dayOfWeek = getDayOfWeek(calendar, firstDayOfWeek)
 
         val prevMontDays = dayOfWeek - 1
         val nextMontDays = 35 - prevMontDays - daysInMonth - 1
@@ -88,11 +88,11 @@ object CalendarUtil {
         return cells
     }
 
-    fun getDaysInWeek(date: Date): ArrayList<DayModel> {
+    fun getDaysInWeek(date: Date, firstDayOfWeek: FirstDayOfWeek): ArrayList<DayModel> {
         val calendar = Calendar.getInstance().clone() as Calendar
         calendar.time = date
 
-        val dayOfWeek = getDayOfWeek(calendar)
+        val dayOfWeek = getDayOfWeek(calendar, firstDayOfWeek)
 
         calendar.add(Calendar.DAY_OF_MONTH, -dayOfWeek)
 
@@ -111,12 +111,17 @@ object CalendarUtil {
         return cells
     }
 
-    private fun getDayOfWeek(calendar: Calendar): Int {
-        val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
-        return if (dayOfWeek == 1) {
-            DAYS_IN_WEEK
-        } else {
-            dayOfWeek - 1
+    private fun getDayOfWeek(calendar: Calendar, firstDayOfWeek: FirstDayOfWeek): Int {
+        val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK).let {
+            if (it == 1) {
+                DAYS_IN_WEEK
+            } else {
+                it - 1
+            }
+        }
+        return when (firstDayOfWeek) {
+            FirstDayOfWeek.MONDAY -> dayOfWeek
+            FirstDayOfWeek.SUNDAY -> dayOfWeek + 1
         }
     }
 }

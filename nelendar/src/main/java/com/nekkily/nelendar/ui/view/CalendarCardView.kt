@@ -40,7 +40,7 @@ fun CalendarCard(
                         dayOfWeekFontSize = dayParams.dayOfWeekFontSize
                     )
                 }
-                val days = CalendarUtil.getDaysInMonth(date)
+                val days = CalendarUtil.getDaysInMonth(date, firstDayOfWeek)
                 items(days.size) {
                     Box {
                         MonthDay(
@@ -54,7 +54,7 @@ fun CalendarCard(
                     }
                 }
             } else {
-                val days = CalendarUtil.getDaysInWeek(date)
+                val days = CalendarUtil.getDaysInWeek(date, firstDayOfWeek)
                 items(days.size) {
                     Box {
                         WeekDay(

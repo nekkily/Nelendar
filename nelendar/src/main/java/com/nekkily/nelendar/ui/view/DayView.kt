@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.nekkily.nelendar.model.DayModel
 import com.nekkily.nelendar.model.params.DayParams
 import com.nekkily.nelendar.util.CalendarUtil
-import com.nekkily.nelendar.util.CalendarUtil.toDateMidnight
+import com.nekkily.nelendar.util.GetDateInMidnight
 import java.util.*
 
 /**
@@ -147,8 +147,8 @@ fun DayCard(
     onItemClick: (DayModel) -> Unit,
     content: @Composable ColumnScope.() -> Unit
 ) {
-    val isDayCurrent = toDateMidnight(Date()) == toDateMidnight(day.date)
-    val isSelectedDay = toDateMidnight(selectedDay.value.date) == toDateMidnight(day.date)
+    val isDayCurrent = GetDateInMidnight().invoke(Date()) == GetDateInMidnight().invoke(day.date)
+    val isSelectedDay = GetDateInMidnight().invoke(selectedDay.value.date) == GetDateInMidnight().invoke(day.date)
 
     Card(
         modifier = Modifier

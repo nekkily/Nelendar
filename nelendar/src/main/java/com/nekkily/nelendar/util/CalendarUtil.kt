@@ -22,21 +22,6 @@ object CalendarUtil {
     }
 
     /**
-     * Brings the date to the beginning of the day
-     * @param date [Date] date to bring.
-     * @return [Date] with 00:00:00:00 time.
-     */
-    fun toDateMidnight(date: Date): Date {
-        val cal = Calendar.getInstance()
-        cal.time = date
-        cal[Calendar.HOUR_OF_DAY] = 0
-        cal[Calendar.MINUTE] = 0
-        cal[Calendar.SECOND] = 0
-        cal[Calendar.MILLISECOND] = 0
-        return cal.time
-    }
-
-    /**
      * @param month [Date] date of the month indicator.
      * @param firstDayOfWeek [FirstDayOfWeek] selected first day of the week.
      * @return [List][DayModel] list of days of the month.

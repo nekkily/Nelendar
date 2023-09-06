@@ -1,13 +1,38 @@
 package com.nekkily.nelendar.ui
 
+/**
+ * Contains the number of days in a week.
+ */
 const val DAYS_IN_WEEK = 7
 
+/**
+ * Represents the day from which the week will start.
+ * @see FirstDayOfWeek.MONDAY
+ * @see FirstDayOfWeek.SUNDAY
+ */
 enum class FirstDayOfWeek {
+    /**
+     * Indicates that the week will start on Monday.
+     */
     MONDAY,
+    /**
+     * Indicates that the week will start on Sunday.
+     */
     SUNDAY
 }
 
+/**
+ * Represents in what form the calendar will be displayed.
+ * @see CalendarState.MONTH
+ * @see CalendarState.WEEK
+ */
 enum class CalendarState {
+    /**
+     * Indicates that the calendar will be displayed by month.
+     */
     MONTH,
+    /**
+     * Indicates that the calendar will be displayed by week.
+     */
     WEEK
 }

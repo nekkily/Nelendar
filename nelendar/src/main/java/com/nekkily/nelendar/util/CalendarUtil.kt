@@ -9,6 +9,11 @@ import java.util.*
 
 object CalendarUtil {
 
+    /**
+     * Gets month indicator date by index.
+     * @param pageIndex [Int]
+     * @return [Date]
+     */
     fun generateMonthByIndex(pageIndex: Int): Date {
         val calendar = Calendar.getInstance()
         calendar.time = Date()
@@ -18,6 +23,11 @@ object CalendarUtil {
         return calendar.time
     }
 
+    /**
+     * Gets week indicator date by index.
+     * @param pageIndex [Int]
+     * @return [Date]
+     */
     fun generateWeekByIndex(pageIndex: Int): Date {
         val calendar = Calendar.getInstance()
         calendar.time = Date()
@@ -27,6 +37,11 @@ object CalendarUtil {
         return calendar.time
     }
 
+    /**
+     * Gets the month name with year. Takes into account the default system locale.
+     * @param month [Date]
+     * @return [String]
+     */
     fun getMonthName(month: Date): String {
         return SimpleDateFormat("LLLL yyyy", LocaleDefault()).format(month)
             .replaceFirstChar {
@@ -38,7 +53,12 @@ object CalendarUtil {
             }
     }
 
-    fun getWeekDaysNames(firstDayOfWeek: FirstDayOfWeek): ArrayList<String> {
+    /**
+     * Gets the abbreviated names of days of the week.
+     * @param firstDayOfWeek [FirstDayOfWeek] selected first day of the week.
+     * @return [List][String]
+     */
+    fun getWeekDaysNames(firstDayOfWeek: FirstDayOfWeek): List<String> {
         val names = ArrayList<String>()
         val daysNames = DateFormatSymbols(LocaleDefault()).shortWeekdays.toMutableList()
         daysNames.removeAt(0)
@@ -50,12 +70,22 @@ object CalendarUtil {
         return names
     }
 
+    /**
+     * Gets the name of the month.
+     * @param date [Date] date to bring.
+     * @return [String]
+     */
     fun getDayOfMonth(date: Date): String {
         val calendar = Calendar.getInstance()
         calendar.time = date
         return calendar.get(Calendar.DAY_OF_MONTH).toString()
     }
 
+    /**
+     * Brings the date to the beginning of the day
+     * @param date [Date] date to bring.
+     * @return [Date] with 00:00:00:00 time.
+     */
     fun toDateMidnight(date: Date): Date {
         val cal = Calendar.getInstance()
         cal.time = date
@@ -66,7 +96,12 @@ object CalendarUtil {
         return cal.time
     }
 
-    fun getDaysInMonth(month: Date, firstDayOfWeek: FirstDayOfWeek): ArrayList<DayModel> {
+    /**
+     * @param month [Date] date of the month indicator.
+     * @param firstDayOfWeek [FirstDayOfWeek] selected first day of the week.
+     * @return [List][DayModel] list of days of the month.
+     */
+    fun getDaysInMonth(month: Date, firstDayOfWeek: FirstDayOfWeek): List<DayModel> {
         val calendar = Calendar.getInstance().clone() as Calendar
         calendar.time = month
 
@@ -74,7 +109,7 @@ object CalendarUtil {
         val daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
         calendar.set(Calendar.DAY_OF_MONTH, 1)
 
-        val dayOfWeek = getDayOfWeek(calendar, firstDayOfWeek)
+        val dayOfWeek = getDayOfWeekNumber(calendar, firstDayOfWeek)
 
         val prevMontDays = dayOfWeek - 1
         val nextMontDays = 35 - prevMontDays - daysInMonth - 1
@@ -88,11 +123,16 @@ object CalendarUtil {
         return cells
     }
 
-    fun getDaysInWeek(date: Date, firstDayOfWeek: FirstDayOfWeek): ArrayList<DayModel> {
+    /**
+     * @param date [Date] date of the week indicator.
+     * @param firstDayOfWeek [FirstDayOfWeek] selected first day of the week.
+     * @return [List][DayModel] list of days of the week.
+     */
+    fun getDaysInWeek(date: Date, firstDayOfWeek: FirstDayOfWeek):List<DayModel> {
         val calendar = Calendar.getInstance().clone() as Calendar
         calendar.time = date
 
-        val dayOfWeek = getDayOfWeek(calendar, firstDayOfWeek)
+        val dayOfWeek = getDayOfWeekNumber(calendar, firstDayOfWeek)
 
         calendar.add(Calendar.DAY_OF_MONTH, -dayOfWeek)
 
@@ -111,7 +151,15 @@ object CalendarUtil {
         return cells
     }
 
-    private fun getDayOfWeek(calendar: Calendar, firstDayOfWeek: FirstDayOfWeek): Int {
+    /**
+     * @param calendar [Calendar] with date, the day of which you need to get.
+     * @param firstDayOfWeek [FirstDayOfWeek] selected first day of the week.
+     * @return [Int] number of week day. Takes into account the selected first day of the week.
+     * If [FirstDayOfWeek.MONDAY] first day of week selected Monday has a number 1, Sunday has a
+     * number 7. If [FirstDayOfWeek.SUNDAY] first day of week selected Monday has a number 2, Sunday
+     * has a number 1.
+     */
+    private fun getDayOfWeekNumber(calendar: Calendar, firstDayOfWeek: FirstDayOfWeek): Int {
         val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK).let {
             if (it == 1) {
                 DAYS_IN_WEEK

@@ -12,8 +12,9 @@ import androidx.compose.ui.unit.dp
 import com.nekkily.nelendar.model.params.CalendarParams
 import com.nekkily.nelendar.ui.CalendarState
 import com.nekkily.nelendar.ui.theme.NelendarTheme
-import com.nekkily.nelendar.util.CalendarSlideDays
-import com.nekkily.nelendar.util.CalendarUtil
+import com.nekkily.nelendar.util.AppLocale
+import com.nekkily.nelendar.util.GetCalendarSlideDays
+import com.nekkily.nelendar.util.GetMonthNameWithYear
 import java.util.Calendar
 
 /**
@@ -26,7 +27,8 @@ import java.util.Calendar
 @Composable
 fun Calendar(
     params: CalendarParams,
-    calendarSlideDays: CalendarSlideDays = CalendarSlideDays(Calendar.getInstance())
+    getCalendarSlideDays: GetCalendarSlideDays = GetCalendarSlideDays(Calendar.getInstance()),
+    getMonthNameWithYear: GetMonthNameWithYear = GetMonthNameWithYear(AppLocale())
 ) {
     NelendarTheme {
 
@@ -34,9 +36,9 @@ fun Calendar(
             contentView = { initialPage, pageIndex ->
                 val index = pageIndex.minus(initialPage)
                 val date = if (params.calendarState == CalendarState.MONTH) {
-                    calendarSlideDays.getInMonth(index)
+                    getCalendarSlideDays.getInMonth(index)
                 } else {
-                    calendarSlideDays.getInWeek(index)
+                    getCalendarSlideDays.getInWeek(index)
                 }
 
                 Box {
@@ -46,7 +48,7 @@ fun Calendar(
                                 .padding(params.calendarHorizontalPadding, 0.dp),
                             fontSize = params.monthTitleFontSize,
                             fontFamily = params.monthTitleFontFamily,
-                            text = CalendarUtil.getMonthName(date),
+                            text = getMonthNameWithYear(date),
                             color = params.monthTitleTextColor
                         )
 
@@ -60,7 +62,7 @@ fun Calendar(
                 }
             },
             onPageChange = { index ->
-                params.onMonthChange(calendarSlideDays.getInMonth(index))
+                params.onMonthChange(getCalendarSlideDays.getInMonth(index))
             }
         )
     }

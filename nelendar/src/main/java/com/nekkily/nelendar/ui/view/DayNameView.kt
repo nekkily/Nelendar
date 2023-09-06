@@ -9,7 +9,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
-import com.nekkily.nelendar.util.LocaleDefault
+import com.nekkily.nelendar.util.AppLocale
 
 /**
  * Day of week name composable view.
@@ -31,7 +31,7 @@ fun DayName(
         textAlign = TextAlign.Center,
         fontSize = fontSize,
         fontFamily = fontFamily,
-        text = day.lowercase(LocaleDefault()),
+        text = day.lowercase(AppLocale().invoke()),
         color = color,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis

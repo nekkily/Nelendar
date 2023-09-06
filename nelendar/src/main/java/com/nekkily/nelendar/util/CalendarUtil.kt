@@ -3,28 +3,12 @@ package com.nekkily.nelendar.util
 import com.nekkily.nelendar.model.DayModel
 import com.nekkily.nelendar.ui.DAYS_IN_WEEK
 import com.nekkily.nelendar.ui.FirstDayOfWeek
-import java.text.DateFormatSymbols
 import java.util.*
 
 object CalendarUtil {
 
 
-    /**
-     * Gets the abbreviated names of days of the week.
-     * @param firstDayOfWeek [FirstDayOfWeek] selected first day of the week.
-     * @return [List][String]
-     */
-    fun getWeekDaysNames(firstDayOfWeek: FirstDayOfWeek): List<String> {
-        val names = ArrayList<String>()
-        val daysNames = DateFormatSymbols(AppLocale().invoke()).shortWeekdays.toMutableList()
-        daysNames.removeAt(0)
-        if (firstDayOfWeek == FirstDayOfWeek.MONDAY) {
-            val sunday = daysNames.removeAt(0)
-            daysNames.add(sunday)
-        }
-        names.addAll(daysNames)
-        return names
-    }
+
 
     /**
      * Gets the name of the month.

@@ -12,7 +12,9 @@ import androidx.compose.ui.unit.dp
 import com.nekkily.nelendar.model.params.CalendarParams
 import com.nekkily.nelendar.ui.CalendarState
 import com.nekkily.nelendar.ui.DAYS_IN_WEEK
+import com.nekkily.nelendar.util.AppLocale
 import com.nekkily.nelendar.util.CalendarUtil
+import com.nekkily.nelendar.util.GetWeekDaysShortNames
 import java.util.Date
 
 /**
@@ -27,10 +29,11 @@ import java.util.Date
 @Composable
 fun CalendarCard(
     date: Date,
-    params: CalendarParams
+    params: CalendarParams,
+    getWeekDaysShortNames: GetWeekDaysShortNames = GetWeekDaysShortNames(AppLocale())
 ) {
     params.apply {
-        val daysNames = CalendarUtil.getWeekDaysNames(firstDayOfWeek)
+        val daysNames = getWeekDaysShortNames(firstDayOfWeek)
 
         LazyVerticalGrid(
             modifier = Modifier

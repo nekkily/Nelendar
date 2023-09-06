@@ -12,7 +12,9 @@ import androidx.compose.ui.unit.dp
 import com.nekkily.nelendar.model.params.CalendarParams
 import com.nekkily.nelendar.ui.CalendarState
 import com.nekkily.nelendar.ui.theme.NelendarTheme
+import com.nekkily.nelendar.util.CalendarSlideDays
 import com.nekkily.nelendar.util.CalendarUtil
+import java.util.Calendar
 
 /**
  * Main composable view of calendar.
@@ -23,7 +25,8 @@ import com.nekkily.nelendar.util.CalendarUtil
  */
 @Composable
 fun Calendar(
-    params: CalendarParams
+    params: CalendarParams,
+    calendarSlideDays: CalendarSlideDays = CalendarSlideDays(Calendar.getInstance())
 ) {
     NelendarTheme {
 
@@ -31,9 +34,9 @@ fun Calendar(
             contentView = { initialPage, pageIndex ->
                 val index = pageIndex.minus(initialPage)
                 val date = if (params.calendarState == CalendarState.MONTH) {
-                    CalendarUtil.generateMonthByIndex(index)
+                    calendarSlideDays.getInMonth(index)
                 } else {
-                    CalendarUtil.generateWeekByIndex(index)
+                    calendarSlideDays.getInWeek(index)
                 }
 
                 Box {
@@ -56,8 +59,8 @@ fun Calendar(
                     }
                 }
             },
-            onPageChange = {
-                params.onMonthChange(CalendarUtil.generateMonthByIndex(it))
+            onPageChange = { index ->
+                params.onMonthChange(calendarSlideDays.getInMonth(index))
             }
         )
     }

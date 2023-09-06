@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
                 val defaultFontFamily = FontFamily.Serif
                 Calendar(
                     params = CalendarParams(
-                        firstDayOfWeek = FirstDayOfWeek.SUNDAY,
+                        firstDayOfWeek = FirstDayOfWeek.MONDAY,
                         monthTitleTextColor = White,
                         monthTitleFontFamily = defaultFontFamily,
                         monthTitleFontSize = 32.sp,

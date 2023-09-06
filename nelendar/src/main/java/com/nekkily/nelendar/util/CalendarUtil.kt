@@ -10,34 +10,6 @@ import java.util.*
 object CalendarUtil {
 
     /**
-     * Gets month indicator date by index.
-     * @param pageIndex [Int]
-     * @return [Date]
-     */
-    fun generateMonthByIndex(pageIndex: Int): Date {
-        val calendar = Calendar.getInstance()
-        calendar.time = Date()
-        val days = arrayListOf(calendar.time)
-        days.add(calendar.time)
-        calendar.add(Calendar.MONTH, pageIndex)
-        return calendar.time
-    }
-
-    /**
-     * Gets week indicator date by index.
-     * @param pageIndex [Int]
-     * @return [Date]
-     */
-    fun generateWeekByIndex(pageIndex: Int): Date {
-        val calendar = Calendar.getInstance()
-        calendar.time = Date()
-        val days = arrayListOf(calendar.time)
-        days.add(calendar.time)
-        calendar.add(Calendar.WEEK_OF_MONTH, pageIndex)
-        return calendar.time
-    }
-
-    /**
      * Gets the month name with year. Takes into account the default system locale.
      * @param month [Date]
      * @return [String]

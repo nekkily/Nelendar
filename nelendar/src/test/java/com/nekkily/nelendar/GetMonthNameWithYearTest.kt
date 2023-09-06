@@ -32,4 +32,15 @@ class GetMonthNameWithYearTest {
 
         assertEquals("December 2027", result)
     }
+
+    @Test
+    fun `invoke() test that incoming parameter does not change`() {
+        val date = SimpleDateFormat("yyyy-MM-dd").parse("2027-12-30")!!
+
+        val expected = date.clone()
+
+        GetMonthNameWithYear(TestLocale()).invoke(date)
+
+        assertEquals(expected, date)
+    }
 }

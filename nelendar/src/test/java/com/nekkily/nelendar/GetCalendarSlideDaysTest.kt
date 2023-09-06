@@ -13,9 +13,8 @@ class GetCalendarSlideDaysTest {
         //It is current month with index 0
         val calendar = Calendar.getInstance()
         calendar.time = SimpleDateFormat("yyyy-MM-dd").parse("2023-09-06")!!
-        val util = GetCalendarSlideDays(calendar)
 
-        val result = util.getInMonth(0)
+        val result = GetCalendarSlideDays(calendar).getInMonth(0)
 
         assertEquals(calendar.time, result)
     }
@@ -63,9 +62,8 @@ class GetCalendarSlideDaysTest {
         //It is current month with index 0
         val calendar = Calendar.getInstance()
         calendar.time = SimpleDateFormat("yyyy-MM-dd").parse("2023-09-06")!!
-        val util = GetCalendarSlideDays(calendar)
 
-        val result = util.getInWeek(0)
+        val result = GetCalendarSlideDays(calendar).getInWeek(0)
 
         assertEquals(calendar.time, result)
     }
@@ -106,5 +104,29 @@ class GetCalendarSlideDaysTest {
         calendar.time = SimpleDateFormat("yyyy-MM-dd").parse("2024-08-28")!!
 
         assertEquals(calendar.time, result)
+    }
+
+    @Test
+    fun `getInWeek() test that incoming parameter does not change`() {
+        val calendar = Calendar.getInstance()
+        calendar.time = SimpleDateFormat("yyyy-MM-dd").parse("2023-09-06")!!
+
+        val expected = calendar.clone()
+
+        GetCalendarSlideDays(calendar).getInWeek(3)
+
+        assertEquals(expected, calendar)
+    }
+
+    @Test
+    fun `getInMonth() test that incoming parameter does not change`() {
+        val calendar = Calendar.getInstance()
+        calendar.time = SimpleDateFormat("yyyy-MM-dd").parse("2023-09-06")!!
+
+        val expected = calendar.clone()
+
+        GetCalendarSlideDays(calendar).getInMonth(3)
+
+        assertEquals(expected, calendar)
     }
 }

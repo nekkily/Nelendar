@@ -19,8 +19,8 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import com.nekkily.nelendar.model.DayModel
 import com.nekkily.nelendar.model.params.DayParams
-import com.nekkily.nelendar.util.CalendarUtil
 import com.nekkily.nelendar.util.GetDateInMidnight
+import com.nekkily.nelendar.util.GetDayOfMonthNumber
 import java.util.*
 
 /**
@@ -184,9 +184,10 @@ fun ColumnScope.DayText(
     day: DayModel,
     fontFamily: FontFamily,
     fontSize: TextUnit,
-    textColor: Color
+    textColor: Color,
+    getDayOfMonthNumber: GetDayOfMonthNumber = GetDayOfMonthNumber()
 ) {
-    val dayOfMonth = CalendarUtil.getDayOfMonth(day.date)
+    val dayOfMonth = getDayOfMonthNumber(day.date)
 
     Box(
         modifier = Modifier

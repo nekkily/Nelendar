@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 
 class GetCalendarSlideDaysTest {
+
     @Test
     fun `getInMonth() page index is 0`() {
         //It is current month with index 0

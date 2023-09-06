@@ -10,16 +10,6 @@ object CalendarUtil {
 
 
 
-    /**
-     * Gets the name of the month.
-     * @param date [Date] date to bring.
-     * @return [String]
-     */
-    fun getDayOfMonth(date: Date): String {
-        val calendar = Calendar.getInstance()
-        calendar.time = date
-        return calendar.get(Calendar.DAY_OF_MONTH).toString()
-    }
 
     /**
      * @param month [Date] date of the month indicator.

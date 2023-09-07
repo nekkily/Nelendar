@@ -13,7 +13,7 @@ import com.nekkily.nelendar.model.params.CalendarParams
 import com.nekkily.nelendar.ui.CalendarState
 import com.nekkily.nelendar.ui.DAYS_IN_WEEK
 import com.nekkily.nelendar.util.AppLocale
-import com.nekkily.nelendar.util.CalendarUtil
+import com.nekkily.nelendar.util.GetCalendarDays
 import com.nekkily.nelendar.util.GetWeekDaysShortNames
 import java.util.Date
 
@@ -52,7 +52,7 @@ fun CalendarCard(
                         fontSize = dayParams.dayOfWeekFontSize
                     )
                 }
-                val days = CalendarUtil.getDaysInMonth(date, firstDayOfWeek)
+                val days = GetCalendarDays().getInMonth(date, firstDayOfWeek)
                 items(days.size) {
                     Box {
                         MonthDay(
@@ -66,7 +66,7 @@ fun CalendarCard(
                     }
                 }
             } else {
-                val days = CalendarUtil.getDaysInWeek(date, firstDayOfWeek)
+                val days = GetCalendarDays().getInWeek(date, firstDayOfWeek)
                 items(days.size) {
                     Box {
                         WeekDay(

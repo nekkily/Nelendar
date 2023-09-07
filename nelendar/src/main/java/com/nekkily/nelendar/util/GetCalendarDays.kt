@@ -3,49 +3,51 @@ package com.nekkily.nelendar.util
 import com.nekkily.nelendar.model.DayModel
 import com.nekkily.nelendar.ui.DAYS_IN_WEEK
 import com.nekkily.nelendar.ui.FirstDayOfWeek
+import com.nekkily.nelendar.ui.MAX_CELLS_COUNT_IN_MONTH
 import java.util.*
 
-object CalendarUtil {
-
-
-
-
+class GetCalendarDays {
 
     /**
-     * @param month [Date] date of the month indicator.
+     * @param indicatorDate [Date] date of the month indicator.
      * @param firstDayOfWeek [FirstDayOfWeek] selected first day of the week.
      * @return [List][DayModel] list of days of the month.
      */
-    fun getDaysInMonth(month: Date, firstDayOfWeek: FirstDayOfWeek): List<DayModel> {
-        val calendar = Calendar.getInstance().clone() as Calendar
-        calendar.time = month
+    fun getInMonth(indicatorDate: Date, firstDayOfWeek: FirstDayOfWeek): List<DayModel> {
+        val calendar = Calendar.getInstance()
+        calendar.time = indicatorDate
 
-        val cells = ArrayList<DayModel>()
-        val daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+        val daysInMonthCount = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
         calendar.set(Calendar.DAY_OF_MONTH, 1)
 
         val dayOfWeek = getDayOfWeekNumber(calendar, firstDayOfWeek)
 
-        val prevMontDays = dayOfWeek - 1
-        val nextMontDays = 35 - prevMontDays - daysInMonth - 1
+        val prevMonthDays = dayOfWeek - 1
+        val nextMontDays = MAX_CELLS_COUNT_IN_MONTH - prevMonthDays - daysInMonthCount - 1
 
-        for (i in -prevMontDays..daysInMonth + nextMontDays) {
-            val dayCalendar = calendar.clone() as Calendar
-            dayCalendar.add(Calendar.DAY_OF_MONTH, i)
-            cells.add(DayModel(dayCalendar.time, i in 0 until daysInMonth))
+        val cells = ArrayList<DayModel>()
+        for (i in -prevMonthDays..daysInMonthCount + nextMontDays) {
+            val day = calendar.clone() as Calendar
+            day.add(Calendar.DAY_OF_MONTH, i)
+            cells.add(
+                DayModel(
+                    day.time,
+                    i in 0 until daysInMonthCount
+                )
+            )
         }
 
         return cells
     }
 
     /**
-     * @param date [Date] date of the week indicator.
+     * @param indicatorDate [Date] date of the week indicator.
      * @param firstDayOfWeek [FirstDayOfWeek] selected first day of the week.
      * @return [List][DayModel] list of days of the week.
      */
-    fun getDaysInWeek(date: Date, firstDayOfWeek: FirstDayOfWeek):List<DayModel> {
-        val calendar = Calendar.getInstance().clone() as Calendar
-        calendar.time = date
+    fun getInWeek(indicatorDate: Date, firstDayOfWeek: FirstDayOfWeek):List<DayModel> {
+        val calendar = Calendar.getInstance()
+        calendar.time = indicatorDate
 
         val dayOfWeek = getDayOfWeekNumber(calendar, firstDayOfWeek)
 
@@ -75,16 +77,19 @@ object CalendarUtil {
      * has a number 1.
      */
     private fun getDayOfWeekNumber(calendar: Calendar, firstDayOfWeek: FirstDayOfWeek): Int {
-        val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK).let {
-            if (it == 1) {
-                DAYS_IN_WEEK
-            } else {
-                it - 1
-            }
-        }
         return when (firstDayOfWeek) {
-            FirstDayOfWeek.MONDAY -> dayOfWeek
-            FirstDayOfWeek.SUNDAY -> dayOfWeek + 1
+            FirstDayOfWeek.MONDAY -> {
+                calendar.get(Calendar.DAY_OF_WEEK).let {
+                    if (it == 1) {
+                        DAYS_IN_WEEK
+                    } else {
+                        it - 1
+                    }
+                }
+            }
+            FirstDayOfWeek.SUNDAY -> {
+                calendar.get(Calendar.DAY_OF_WEEK)
+            }
         }
     }
 }

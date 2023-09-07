@@ -1,5 +1,11 @@
 package com.nekkily.nelendar.ui
 
+
+/**
+ * Contains the max cells count in month that displayed on screen.
+ */
+const val MAX_CELLS_COUNT_IN_MONTH = 35
+
 /**
  * Contains the number of days in a week.
  */

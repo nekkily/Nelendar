@@ -45,22 +45,23 @@ class GetCalendarDays {
      * @param firstDayOfWeek [FirstDayOfWeek] selected first day of the week.
      * @return [List][DayModel] list of days of the week.
      */
-    fun getInWeek(indicatorDate: Date, firstDayOfWeek: FirstDayOfWeek):List<DayModel> {
+    fun getInWeek(indicatorDate: Date, firstDayOfWeek: FirstDayOfWeek): List<DayModel> {
         val calendar = Calendar.getInstance()
         calendar.time = indicatorDate
 
-        val dayOfWeek = getDayOfWeekNumber(calendar, firstDayOfWeek)
+        val indicatorCalendar = calendar.clone() as Calendar
 
-        calendar.add(Calendar.DAY_OF_MONTH, -dayOfWeek)
+        calendar.firstDayOfWeek = firstDayOfWeek.calendarValue
+        calendar.set(Calendar.DAY_OF_WEEK, calendar.firstDayOfWeek)
 
         val cells = ArrayList<DayModel>()
-        for (i in 1..DAYS_IN_WEEK) {
+        for (i in 0 until DAYS_IN_WEEK) {
             val dayCalendar = calendar.clone() as Calendar
-            dayCalendar.add(Calendar.DAY_OF_WEEK, i)
+            dayCalendar.add(Calendar.DAY_OF_MONTH, i)
             cells.add(
                 DayModel(
                     dayCalendar.time,
-                    dayCalendar.get(Calendar.MONTH) == calendar.get(Calendar.MONTH)
+                    dayCalendar.get(Calendar.MONTH) == indicatorCalendar.get(Calendar.MONTH)
                 )
             )
         }

@@ -1,13 +1,13 @@
 package com.nekkily.nelendar
 
-import com.nekkily.nelendar.util.GetCalendarSlideDays
+import com.nekkily.nelendar.util.GetCalendarSlideIndicatorDate
 import org.junit.Test
 
 import org.junit.Assert.*
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
-class GetCalendarSlideDaysTest {
+class GetCalendarSlideIndicatorDateTest {
 
     @Test
     fun `getInMonth() page index is 0`() {
@@ -15,7 +15,7 @@ class GetCalendarSlideDaysTest {
         val calendar = Calendar.getInstance()
         calendar.time = SimpleDateFormat("yyyy-MM-dd").parse("2023-09-06")!!
 
-        val result = GetCalendarSlideDays(calendar).getInMonth(0)
+        val result = GetCalendarSlideIndicatorDate(calendar).getInMonth(0)
 
         assertEquals(calendar.time, result)
     }
@@ -24,7 +24,7 @@ class GetCalendarSlideDaysTest {
     fun `getInMonth() page index less than 0`() {
         val calendar = Calendar.getInstance()
         calendar.time = SimpleDateFormat("yyyy-MM-dd").parse("2023-09-06")!!
-        val util = GetCalendarSlideDays(calendar)
+        val util = GetCalendarSlideIndicatorDate(calendar)
 
         var result = util.getInMonth(-1)
 
@@ -43,7 +43,7 @@ class GetCalendarSlideDaysTest {
     fun `getInMonth() page index more than 0`() {
         val calendar = Calendar.getInstance()
         calendar.time = SimpleDateFormat("yyyy-MM-dd").parse("2023-08-06")!!
-        val util = GetCalendarSlideDays(calendar)
+        val util = GetCalendarSlideIndicatorDate(calendar)
 
         var result = util.getInMonth(1)
 
@@ -64,7 +64,7 @@ class GetCalendarSlideDaysTest {
         val calendar = Calendar.getInstance()
         calendar.time = SimpleDateFormat("yyyy-MM-dd").parse("2023-09-06")!!
 
-        val result = GetCalendarSlideDays(calendar).getInWeek(0)
+        val result = GetCalendarSlideIndicatorDate(calendar).getInWeek(0)
 
         assertEquals(calendar.time, result)
     }
@@ -73,7 +73,7 @@ class GetCalendarSlideDaysTest {
     fun `getInWeek() page index less than 0`() {
         val calendar = Calendar.getInstance()
         calendar.time = SimpleDateFormat("yyyy-MM-dd").parse("2023-09-06")!!
-        val util = GetCalendarSlideDays(calendar)
+        val util = GetCalendarSlideIndicatorDate(calendar)
 
         var result = util.getInWeek(-1)
 
@@ -92,7 +92,7 @@ class GetCalendarSlideDaysTest {
     fun `getInWeek() page index more than 0`() {
         val calendar = Calendar.getInstance()
         calendar.time = SimpleDateFormat("yyyy-MM-dd").parse("2023-09-06")!!
-        val util = GetCalendarSlideDays(calendar)
+        val util = GetCalendarSlideIndicatorDate(calendar)
 
         var result = util.getInWeek(1)
 
@@ -114,7 +114,7 @@ class GetCalendarSlideDaysTest {
 
         val expected = calendar.clone()
 
-        GetCalendarSlideDays(calendar).getInWeek(3)
+        GetCalendarSlideIndicatorDate(calendar).getInWeek(3)
 
         assertEquals(expected, calendar)
     }
@@ -126,7 +126,7 @@ class GetCalendarSlideDaysTest {
 
         val expected = calendar.clone()
 
-        GetCalendarSlideDays(calendar).getInMonth(3)
+        GetCalendarSlideIndicatorDate(calendar).getInMonth(3)
 
         assertEquals(expected, calendar)
     }

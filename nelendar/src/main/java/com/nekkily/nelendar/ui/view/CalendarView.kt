@@ -13,7 +13,7 @@ import com.nekkily.nelendar.model.params.CalendarParams
 import com.nekkily.nelendar.ui.CalendarState
 import com.nekkily.nelendar.ui.theme.NelendarTheme
 import com.nekkily.nelendar.util.AppLocale
-import com.nekkily.nelendar.util.GetCalendarSlideDays
+import com.nekkily.nelendar.util.GetCalendarSlideIndicatorDate
 import com.nekkily.nelendar.util.GetMonthNameWithYear
 import java.util.Calendar
 
@@ -27,7 +27,7 @@ import java.util.Calendar
 @Composable
 fun Calendar(
     params: CalendarParams,
-    getCalendarSlideDays: GetCalendarSlideDays = GetCalendarSlideDays(Calendar.getInstance()),
+    getCalendarSlideIndicatorDate: GetCalendarSlideIndicatorDate = GetCalendarSlideIndicatorDate(Calendar.getInstance()),
     getMonthNameWithYear: GetMonthNameWithYear = GetMonthNameWithYear(AppLocale())
 ) {
     NelendarTheme {
@@ -36,9 +36,9 @@ fun Calendar(
             contentView = { initialPage, pageIndex ->
                 val index = pageIndex.minus(initialPage)
                 val date = if (params.calendarState == CalendarState.MONTH) {
-                    getCalendarSlideDays.getInMonth(index)
+                    getCalendarSlideIndicatorDate.getInMonth(index)
                 } else {
-                    getCalendarSlideDays.getInWeek(index)
+                    getCalendarSlideIndicatorDate.getInWeek(index)
                 }
 
                 Box {
@@ -62,7 +62,7 @@ fun Calendar(
                 }
             },
             onPageChange = { index ->
-                params.onMonthChange(getCalendarSlideDays.getInMonth(index))
+                params.onMonthChange(getCalendarSlideIndicatorDate.getInMonth(index))
             }
         )
     }

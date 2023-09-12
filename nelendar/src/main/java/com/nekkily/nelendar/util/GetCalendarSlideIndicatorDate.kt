@@ -6,7 +6,7 @@ import java.util.Date
 /**
  * Util to get indicator date of month or week slide. Depends on the current date.
  */
-class GetCalendarSlideDays(private val calendar: Calendar) {
+class GetCalendarSlideIndicatorDate(private val calendar: Calendar) {
 
     /**
      * Gets month indicator date by index.

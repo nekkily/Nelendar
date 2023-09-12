@@ -1,5 +1,7 @@
 package com.nekkily.nelendar.ui
 
+import java.util.Calendar
+
 
 /**
  * Contains the max cells count in month that displayed on screen.
@@ -16,15 +18,15 @@ const val DAYS_IN_WEEK = 7
  * @see FirstDayOfWeek.MONDAY
  * @see FirstDayOfWeek.SUNDAY
  */
-enum class FirstDayOfWeek {
+enum class FirstDayOfWeek(val calendarValue: Int) {
     /**
      * Indicates that the week will start on Monday.
      */
-    MONDAY,
+    MONDAY(Calendar.MONDAY),
     /**
      * Indicates that the week will start on Sunday.
      */
-    SUNDAY
+    SUNDAY(Calendar.SUNDAY)
 }
 
 /**

@@ -49,7 +49,7 @@ Calendar(
 ```
 
 dependencies {
-  implementation 'com.jakewharton.timber:timber:5.0.1'
+  implementation 'com.github.nekkily:nelendar:1.0.5'
 }
 
 ```
